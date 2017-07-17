@@ -70,12 +70,14 @@ class App extends Component {
 			products: products,
 			term: '',
 			isInStock: true,
-			categoriesFilter: 'meat'
+			categoriesFilter: 'meat',
+			cartProducts: []
 		}
 
 		this.searchHandler = this.searchHandler.bind(this);
 		this.stockHandler = this.stockHandler.bind(this);
 		this.categoriesHandler = this.categoriesHandler.bind(this);
+		this.addProductHandler = this.addProductHandler.bind(this);
 
 	}
 
@@ -91,6 +93,13 @@ class App extends Component {
 	categoriesHandler(event) {
 		this.setState({ categoriesFilter: event.target.value });
 		console.log(event.target.value);
+	}
+
+	addProductHandler(product) {
+		let newArr = this.state.cartProducts;
+		newArr.push(product);
+		this.setState({ cartProducts: newArr});
+		console.log(this.state.cartProducts);
 	}
 
 	render() {
@@ -116,12 +125,15 @@ class App extends Component {
 					</select>
 				</form>
 
+				<h6>Products in cart {this.state.cartProducts.length}</h6>
+
 				{
 					this.state.products.filter(searchingFor(this.state.term, this.state.isInStock, this.state.categoriesFilter)).map( product =>
 						<div className="product--container" key={product.id}>
 							<h4> {product.name}</h4>
 							<h4> {product.cat}</h4>
 							<h4> In Stock: {product.stocked.toString()}</h4>
+							<button onClick={() =>this.addProductHandler(product)}>ADD TO CART</button>
 						</div>
 					)
 				}
