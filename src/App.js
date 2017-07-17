@@ -42,12 +42,15 @@ const categories =[
 	'cereal'
 ]
 
-function searchingFor(term, isInStock) {
-	return function(x){
+function searchingFor(term, isInStock, catFilter) {
+	return function(product){
 
-		if(x.name.toLowerCase().includes(term.toLowerCase()) || !term) {
+		if(product.name.toLowerCase().includes(term.toLowerCase()) || !term) {
 			//- If 
-			if(isInStock && !x.stocked) {
+			if(isInStock && !product.stocked) {
+				return false;
+			}
+			else if(catFilter !== product.cat) {
 				return false;
 			}
 			else {
@@ -69,11 +72,13 @@ class App extends Component {
 		this.state = {
 			products: products,
 			term: '',
-			isInStock: true
+			isInStock: true,
+			categoriesFilter: 'meat'
 		}
 
 		this.searchHandler = this.searchHandler.bind(this);
 		this.stockHandler = this.stockHandler.bind(this);
+		this.categoriesHandler = this.categoriesHandler.bind(this);
 
 	}
 
@@ -86,12 +91,17 @@ class App extends Component {
 		this.setState({ isInStock: event.target.checked})
 	}
 
+	categoriesHandler(event) {
+		this.setState({ categoriesFilter: event.target.value });
+		console.log(event.target.value);
+	}
+
 	render() {
 
 		const categoriesList = categories
 			.map(item => {
 				return (
-					<option>{item}</option>
+					<option key={item}>{item}</option>
 				)
 			})
 
@@ -104,13 +114,13 @@ class App extends Component {
 						<input className="ml-2" type="checkbox" checked={this.state.isInStock} onChange={this.stockHandler} />
 					</p>
 
-					<select>
+					<select value={this.state.categoriesFilter} onChange={this.categoriesHandler}>
 						{categoriesList}
 					</select>
 				</form>
 
 				{
-					this.state.products.filter(searchingFor(this.state.term, this.state.isInStock)).map( product =>
+					this.state.products.filter(searchingFor(this.state.term, this.state.isInStock, this.state.categoriesFilter)).map( product =>
 						<div className="product--container" key={product.id}>
 							<h4> {product.name}</h4>
 							<h4> {product.cat}</h4>
