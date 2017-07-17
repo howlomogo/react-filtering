@@ -79,6 +79,9 @@ class App extends Component {
 		this.categoriesHandler = this.categoriesHandler.bind(this);
 		this.addProductHandler = this.addProductHandler.bind(this);
 
+		// A dummy uid, for adding unique products to cart.
+		this.uniqueId = 1000;
+
 	}
 
 	searchHandler(event) {
@@ -96,10 +99,29 @@ class App extends Component {
 	}
 
 	addProductHandler(product) {
+		// Fix this tomorrow
+		var uid = this.uniqueId++;
 		let newArr = this.state.cartProducts;
+		product.uid = uid;
+		console.log("ADDED " + product.name + " to cart - " + " It has the uid of " + product.uid);
 		newArr.push(product);
 		this.setState({ cartProducts: newArr});
+
 		console.log(this.state.cartProducts);
+	}
+
+	removeProductHandler(product) {
+		console.log("remove " + product.name);
+
+		for( let i = 0; i < this.state.cartProducts.length; i++) {
+			if( this.state.cartProducts[i].uid == product.uid ) {
+				let newArr = this.state.cartProducts;
+				newArr.splice(i,1);
+				this.setState({ cartProducts: newArr });
+				console.log("Removed Product with the unique ID of " + product.uid);
+			}
+		}
+
 	}
 
 	render() {
@@ -114,18 +136,18 @@ class App extends Component {
 		return (
 			<div>
 				<form>
+					<label>Search for a product</label>
 					<input type="text" onChange={this.searchHandler} value={this.state.term} />
 					<p>
 						Is Product In Stock
 						<input className="ml-2" type="checkbox" checked={this.state.isInStock} onChange={this.stockHandler} />
 					</p>
 
+					<label>Which category is it in?</label>
 					<select value={this.state.categoriesFilter} onChange={this.categoriesHandler}>
 						{categoriesList}
 					</select>
 				</form>
-
-				<h6>Products in cart {this.state.cartProducts.length}</h6>
 
 				{
 					this.state.products.filter(searchingFor(this.state.term, this.state.isInStock, this.state.categoriesFilter)).map( product =>
@@ -137,7 +159,16 @@ class App extends Component {
 						</div>
 					)
 				}
-				<h1>Hello</h1>
+				<h4>Products added to cart - {this.state.cartProducts.length}</h4>
+				{
+					this.state.cartProducts.map( product =>
+						<div>
+							<h4> Unique Id: {product.uid} </h4>
+							<h4> {product.name} </h4>
+							<button onClick={() =>this.removeProductHandler(product)}>Remove From Cart</button>
+						</div>
+					)
+				}
 			</div>
 		);
 	}
