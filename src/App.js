@@ -47,10 +47,7 @@ function searchingFor(term, isInStock, catFilter) {
 
 		if(product.name.toLowerCase().includes(term.toLowerCase()) || !term) {
 			//- If 
-			if(isInStock && !product.stocked) {
-				return false;
-			}
-			else if(catFilter !== product.cat) {
+			if(isInStock && !product.stocked || catFilter !== product.cat) {
 				return false;
 			}
 			else {
@@ -124,6 +121,7 @@ class App extends Component {
 						<div className="product--container" key={product.id}>
 							<h4> {product.name}</h4>
 							<h4> {product.cat}</h4>
+							<h4> In Stock: {product.stocked.toString()}</h4>
 						</div>
 					)
 				}
