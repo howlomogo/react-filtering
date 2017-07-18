@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import './App.css';
+import {
+	BrowserRouter as Router,
+	Route,
+	Link
+} from 'react-router-dom'
+
 import Header from './components/Header';
 import Filters from './components/Filters';
 import Home from './pages/Home';
 import Account from './pages/Account';
+import './App.css';
 
 
 const products = [
@@ -110,7 +116,12 @@ class App extends Component {
 					categoryFilter={this.categoryFilterHandler.bind(this)}
 					>
 				</Filters>
-
+				<Router>
+				<div>
+					<Route exact path="/" component={Home}/>
+					<Route path="/account" component={(props) => <Account {...props} products={this.state.cartProducts} remove={this.removeProductHandler.bind(this)}/>}/>
+				</div>
+				</Router>
 				<Home
 					state={this.state}
 					addProduct={this.addProductHandler.bind(this)}
