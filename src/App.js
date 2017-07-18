@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from './components/Header';
+import Filters from './components/Filters';
+import Home from './pages/Home';
 
 
 const products = [
@@ -124,6 +127,7 @@ class App extends Component {
 
 	removeProductHandler(product) {
 		console.log("remove " + product.name);
+		console.log(this.state.cartProducts);
 
 		for( let i = 0; i < this.state.cartProducts.length; i++) {
 			if( this.state.cartProducts[i].id == product.id ) {
@@ -147,6 +151,8 @@ class App extends Component {
 
 		return (
 			<div>
+				<Header></Header>
+				<Filters></Filters>
 				<form>
 					<label>Search for a product</label>
 					<input type="text" onChange={this.searchHandler} value={this.state.term} />
@@ -171,16 +177,9 @@ class App extends Component {
 						</div>
 					)
 				}
-				<h4>Products added to cart - {this.state.cartProducts.length}</h4>
-				{
-					this.state.cartProducts.map( product =>
-						<div>
-							<h4> {product.name} </h4>
-							<h6> Quantity: {product.quantity} </h6>
-							<button onClick={() =>this.removeProductHandler(product)}>Remove From Cart</button>
-						</div>
-					)
-				}
+
+				<Home products={this.state.cartProducts} remove={this.removeProductHandler.bind(this)}></Home>
+
 			</div>
 		);
 	}
