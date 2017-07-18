@@ -39,25 +39,6 @@ const products = [
 	}
 ]
 
-function searchingFor(term, isInStock, catFilter) {
-	return function(product){
-
-		if(product.name.toLowerCase().includes(term.toLowerCase()) || !term) {
-			//- If 
-			if(isInStock && !product.stocked || catFilter !== product.cat) {
-				return false;
-			}
-			else {
-				return true;
-			}
-		}
-		else {
-			return false;
-		}
-		// return x.first.toLowerCase().includes(term.toLowerCase()) || !term;
-	}
-}
-
 class App extends Component {
 
 	constructor(props){
@@ -70,30 +51,18 @@ class App extends Component {
 			categoriesFilter: 'meat',
 			cartProducts: []
 		}
-
-		this.searchHandler = this.searchHandler.bind(this);
-		this.stockHandler = this.stockHandler.bind(this);
-		this.categoriesHandler = this.categoriesHandler.bind(this);
-		this.addProductHandler = this.addProductHandler.bind(this);
-
-		// A dummy uid, for adding unique products to cart.
-		this.uniqueId = 1000;
-
 	}
 
-	searchHandler(event) {
+	searchFilterHandler(event) {
 		this.setState({ term: event.target.value })
 	}
 
-	stockHandler(event) {
-		console.log(event.target.checked);
+	stockFilterHandler(event) {
 		this.setState({ isInStock: event.target.checked})
 	}
 
-	categoriesHandler(event) {
-		console.log("ewfe");
+	categoryFilterHandler(event) {
 		this.setState({ categoriesFilter: event.target.value });
-		console.log(event.target.value);
 	}
 
 	addProductHandler(product) {
@@ -101,9 +70,8 @@ class App extends Component {
 
 		let alreadyInCart = false;
 		for(var i = 0; i < this.state.cartProducts.length; i++) {
-		    if (this.state.cartProducts[i].id == product.id) {
+		    if (this.state.cartProducts[i].id === product.id) {
 
-		    	// let newArr2 = this.state.cartProducts[i];
 		    	newArr[i].quantity++;
 		    	this.setState({
 		    		cartProducts: newArr
@@ -121,50 +89,31 @@ class App extends Component {
 	}
 
 	removeProductHandler(product) {
-		console.log("remove " + product.name);
-		console.log(this.state.cartProducts);
-
 		for( let i = 0; i < this.state.cartProducts.length; i++) {
-			if( this.state.cartProducts[i].id == product.id ) {
+			if( this.state.cartProducts[i].id === product.id ) {
 				let newArr = this.state.cartProducts;
 				newArr.splice(i,1);
 				this.setState({ cartProducts: newArr });
-				console.log("Removed Product with the ID of " + product.id);
 			}
 		}
 
 	}
 
 	render() {
-
-		const categoriesList =[
-			'groceries', 
-			'drinks', 
-			'meat', 
-			'cereal'
-		]
-			.map(item => {
-				return (
-					<option key={item}>{item}</option>
-				)
-			})
-
 		return (
 			<div>
 				<Header></Header>
 				<Filters 
-					searchFilter={this.searchHandler.bind(this)} 
-					stockFilter={this.stockHandler.bind(this)} 
-					categoriesFilter={this.categoriesHandler.bind(this)}
-					categoriesList={categoriesList}
 					state={this.state}
+					searchFilter={this.searchFilterHandler.bind(this)} 
+					stockFilter={this.stockFilterHandler.bind(this)} 
+					categoryFilter={this.categoryFilterHandler.bind(this)}
 					>
 				</Filters>
 
 				<Home
 					state={this.state}
 					addProduct={this.addProductHandler.bind(this)}
-					searchFor={searchingFor.bind(this)}
 				>
 				</Home>
 

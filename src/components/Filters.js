@@ -1,9 +1,20 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-
 
 class Filters extends Component {
 	render() {
+
+		const categoriesList =[
+			'groceries', 
+			'drinks', 
+			'meat', 
+			'cereal'
+		]
+		.map(item => {
+			return (
+				<option key={item}>{item}</option>
+			)
+		})
+
 		return (
 			<form>
 				<label>Search for a product</label>
@@ -14,8 +25,8 @@ class Filters extends Component {
 				</p>
 
 				<label>Which category is it in?</label>
-				<select value={this.props.state.categoriesFilter} onChange={this.props.categoriesFilter}>
-					{this.props.categoriesList}
+				<select value={this.props.state.categoriesFilter} onChange={this.props.categoryFilter}>
+					{categoriesList}
 				</select>
 			</form>
 		)
