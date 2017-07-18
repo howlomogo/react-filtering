@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import Filters from './components/Filters';
 import Home from './pages/Home';
+import Account from './pages/Account';
 
 
 const products = [
@@ -36,13 +37,6 @@ const products = [
 		stocked: true,
 		cat: "meat"
 	}
-]
-
-const categories =[
-	'groceries', 
-	'drinks', 
-	'meat', 
-	'cereal'
 ]
 
 function searchingFor(term, isInStock, catFilter) {
@@ -97,6 +91,7 @@ class App extends Component {
 	}
 
 	categoriesHandler(event) {
+		console.log("ewfe");
 		this.setState({ categoriesFilter: event.target.value });
 		console.log(event.target.value);
 	}
@@ -142,7 +137,12 @@ class App extends Component {
 
 	render() {
 
-		const categoriesList = categories
+		const categoriesList =[
+			'groceries', 
+			'drinks', 
+			'meat', 
+			'cereal'
+		]
 			.map(item => {
 				return (
 					<option key={item}>{item}</option>
@@ -152,33 +152,26 @@ class App extends Component {
 		return (
 			<div>
 				<Header></Header>
-				<Filters></Filters>
-				<form>
-					<label>Search for a product</label>
-					<input type="text" onChange={this.searchHandler} value={this.state.term} />
-					<p>
-						Is Product In Stock
-						<input className="ml-2" type="checkbox" checked={this.state.isInStock} onChange={this.stockHandler} />
-					</p>
+				<Filters 
+					searchFilter={this.searchHandler.bind(this)} 
+					stockFilter={this.stockHandler.bind(this)} 
+					categoriesFilter={this.categoriesHandler.bind(this)}
+					categoriesList={categoriesList}
+					state={this.state}
+					>
+				</Filters>
 
-					<label>Which category is it in?</label>
-					<select value={this.state.categoriesFilter} onChange={this.categoriesHandler}>
-						{categoriesList}
-					</select>
-				</form>
+				<Home
+					state={this.state}
+					addProduct={this.addProductHandler.bind(this)}
+					searchFor={searchingFor.bind(this)}
+				>
+				</Home>
 
-				{
-					this.state.products.filter(searchingFor(this.state.term, this.state.isInStock, this.state.categoriesFilter)).map( product =>
-						<div className="product--container" key={product.id}>
-							<h4> {product.name}</h4>
-							<h4> {product.cat}</h4>
-							<h4> In Stock: {product.stocked.toString()}</h4>
-							<button onClick={() =>this.addProductHandler(product)}>ADD TO CART</button>
-						</div>
-					)
-				}
-
-				<Home products={this.state.cartProducts} remove={this.removeProductHandler.bind(this)}></Home>
+				<Account 
+					products={this.state.cartProducts} 
+					remove={this.removeProductHandler.bind(this)}>
+				</Account>
 
 			</div>
 		);

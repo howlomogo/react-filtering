@@ -5,9 +5,19 @@ import ReactDOM from 'react-dom';
 class Filters extends Component {
 	render() {
 		return (
-			<div>
-				<h1>This is the Filters</h1>
-			</div>
+			<form>
+				<label>Search for a product</label>
+				<input type="text" onChange={this.props.searchFilter} value={this.props.state.term} />
+				<p>
+					Is Product In Stock
+					<input className="ml-2" type="checkbox" checked={this.props.state.isInStock} onChange={this.props.stockFilter} />
+				</p>
+
+				<label>Which category is it in?</label>
+				<select value={this.props.state.categoriesFilter} onChange={this.props.categoriesFilter}>
+					{this.props.categoriesList}
+				</select>
+			</form>
 		)
 	}
 }

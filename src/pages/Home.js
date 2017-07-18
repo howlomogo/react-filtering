@@ -6,13 +6,13 @@ class Home extends Component {
 	render() {
 		return (
 			<div>
-				<h4>Products added to cart - {this.props.products.length}</h4>
 				{
-					this.props.products.map( product =>
-						<div>
-							<h4> {product.name} </h4>
-							<h6> Quantity: {product.quantity} </h6>
-							<button onClick={() =>this.props.remove(product)}>Remove From Cart</button>
+					this.props.state.products.filter(this.props.searchFor(this.props.state.term, this.props.state.isInStock, this.props.state.categoriesFilter)).map( product =>
+						<div className="product--container" key={product.id}>
+							<h4> {product.name}</h4>
+							<h4> {product.cat}</h4>
+							<h4> In Stock: {product.stocked.toString()}</h4>
+							<button onClick={() =>this.props.addProduct(product)}>ADD TO CART</button>
 						</div>
 					)
 				}
