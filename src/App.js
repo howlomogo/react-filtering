@@ -99,26 +99,38 @@ class App extends Component {
 	}
 
 	addProductHandler(product) {
-		// Fix this tomorrow
-		var uid = this.uniqueId++;
 		let newArr = this.state.cartProducts;
-		product.uid = uid;
-		console.log("ADDED " + product.name + " to cart - " + " It has the uid of " + product.uid);
-		newArr.push(product);
-		this.setState({ cartProducts: newArr});
 
-		console.log(this.state.cartProducts);
+		let alreadyInCart = false;
+		for(var i = 0; i < this.state.cartProducts.length; i++) {
+		    if (this.state.cartProducts[i].id == product.id) {
+
+		    	// let newArr2 = this.state.cartProducts[i];
+		    	newArr[i].quantity++;
+		    	this.setState({
+		    		cartProducts: newArr
+		    	});
+		        alreadyInCart = true;
+		        break;
+		    }
+		}
+
+		if(!alreadyInCart) {
+			product.quantity = 1;
+			newArr.push(product);
+			this.setState({ cartProducts: newArr});
+		}
 	}
 
 	removeProductHandler(product) {
 		console.log("remove " + product.name);
 
 		for( let i = 0; i < this.state.cartProducts.length; i++) {
-			if( this.state.cartProducts[i].uid == product.uid ) {
+			if( this.state.cartProducts[i].id == product.id ) {
 				let newArr = this.state.cartProducts;
 				newArr.splice(i,1);
 				this.setState({ cartProducts: newArr });
-				console.log("Removed Product with the unique ID of " + product.uid);
+				console.log("Removed Product with the ID of " + product.id);
 			}
 		}
 
@@ -163,8 +175,8 @@ class App extends Component {
 				{
 					this.state.cartProducts.map( product =>
 						<div>
-							<h4> Unique Id: {product.uid} </h4>
 							<h4> {product.name} </h4>
+							<h6> Quantity: {product.quantity} </h6>
 							<button onClick={() =>this.removeProductHandler(product)}>Remove From Cart</button>
 						</div>
 					)
