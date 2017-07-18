@@ -15,10 +15,12 @@ class Filters extends Component {
 			)
 		})
 
+		let newTerm = '';
+
 		return (
 			<form>
 				<label>Search for a product</label>
-				<input type="text" onChange={this.props.searchFilter} value={this.props.state.term} />
+				<input type="text" onChange={this.props.searchFilter} autoFocus value={this.props.state.term} />
 				<p>
 					Is Product In Stock
 					<input className="ml-2" type="checkbox" checked={this.props.state.isInStock} onChange={this.props.stockFilter} />

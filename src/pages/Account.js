@@ -4,8 +4,9 @@ class Account extends Component {
 	render() {
 		return (
 			<div>
-				<h4>Products added to cart - {this.props.products.length}</h4>
+			<h1>ACCOUNT PAGE</h1>
 				{
+					/* NO RESULTS FOUND */
 					this.props.products
 					.map( product =>
 						<div key={product.id}>
@@ -15,6 +16,7 @@ class Account extends Component {
 						</div>
 					)
 				}
+
 			</div>
 		)
 	}

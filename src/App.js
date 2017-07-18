@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {
 	BrowserRouter as Router,
-	Route,
-	Link
+	Route
 } from 'react-router-dom'
 
 import Header from './components/Header';
-import Filters from './components/Filters';
 import Home from './pages/Home';
 import Account from './pages/Account';
 import './App.css';
@@ -68,6 +66,7 @@ class App extends Component {
 	}
 
 	categoryFilterHandler(event) {
+		console.log(event);
 		this.setState({ categoriesFilter: event.target.value });
 	}
 
@@ -107,33 +106,24 @@ class App extends Component {
 
 	render() {
 		return (
+			<Router>
 			<div>
-				<Header></Header>
-				<Filters 
-					state={this.state}
-					searchFilter={this.searchFilterHandler.bind(this)} 
-					stockFilter={this.stockFilterHandler.bind(this)} 
-					categoryFilter={this.categoryFilterHandler.bind(this)}
-					>
-				</Filters>
-				<Router>
+				<Header products={this.state.cartProducts}></Header>
 				<div>
-					<Route exact path="/" component={Home}/>
-					<Route path="/account" component={(props) => <Account {...props} products={this.state.cartProducts} remove={this.removeProductHandler.bind(this)}/>}/>
+					<Route exact path="/" component={(props) => 
+						<Home 
+							state={this.state} 
+							addProduct={this.addProductHandler.bind(this)}
+							searchFilter={this.searchFilterHandler.bind(this)} 
+							stockFilter={this.stockFilterHandler.bind(this)} 
+							categoryFilter={this.categoryFilterHandler.bind(this)}
+						/>
+					}/>
+					<Route path="/account" component={(props) => <Account products={this.state.cartProducts} remove={this.removeProductHandler.bind(this)}/>}/>
 				</div>
-				</Router>
-				<Home
-					state={this.state}
-					addProduct={this.addProductHandler.bind(this)}
-				>
-				</Home>
-
-				<Account 
-					products={this.state.cartProducts} 
-					remove={this.removeProductHandler.bind(this)}>
-				</Account>
 
 			</div>
+			</Router>
 		);
 	}
 }

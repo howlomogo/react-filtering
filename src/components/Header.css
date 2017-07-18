@@ -1,0 +1,10 @@
+.right--link {
+	display: block;
+	float: right;
+}
+
+.left--link {
+	display: block;
+	margin-right: 16px;
+	float: left;
+}

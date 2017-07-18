@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Filters from './../components/Filters';
+
 
 class Home extends Component {
 	render() {
@@ -23,6 +25,18 @@ class Home extends Component {
 
 		return (
 			<div>
+
+
+				<Filters 
+					state={this.props.state}
+					searchFilter={this.props.searchFilter} 
+					stockFilter={this.props.stockFilter} 
+					categoryFilter={this.props.categoryFilter}
+					>
+				</Filters>
+
+
+				<h1>HOME PAGE</h1>
 				{
 					this.props.state.products.filter(
 						filteredResults(this.props.state.term, this.props.state.isInStock, this.props.state.categoriesFilter))
