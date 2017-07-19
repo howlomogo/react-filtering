@@ -57,10 +57,23 @@ class App extends Component {
 		}
 	}
 
-	changeCartQuantity(id) {
-		console.log(id);
+	changeCartQuantity(product) {
+		console.log(product);
+		let newArr = this.state.cartProducts;
+
 		// Get ID, change state based on product id
-				
+		for(var i = 0; i < this.state.cartProducts.length; i++) {
+		    if (this.state.cartProducts[i].id === product.id) {
+
+		    	newArr[i].quantity = 77;
+		    	this.setState({
+		    		cartProducts: newArr
+		    	});
+		        break;
+		    }
+		}
+
+
 	}
 
 	searchFilterHandler(event) {
