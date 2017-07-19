@@ -57,23 +57,21 @@ class App extends Component {
 		}
 	}
 
-	changeCartQuantity(product) {
-		console.log(product);
+	changeCartQuantity(product, newQuantity) {
 		let newArr = this.state.cartProducts;
 
 		// Get ID, change state based on product id
 		for(var i = 0; i < this.state.cartProducts.length; i++) {
 		    if (this.state.cartProducts[i].id === product.id) {
 
-		    	newArr[i].quantity = 77;
+		    	newArr[i].quantity = newQuantity;
 		    	this.setState({
 		    		cartProducts: newArr
 		    	});
 		        break;
 		    }
 		}
-
-
+		console.log(product);
 	}
 
 	searchFilterHandler(event) {
@@ -113,6 +111,8 @@ class App extends Component {
 	}
 
 	removeProductHandler(product) {
+		console.log("REMOVE IT");
+		console.log(product);
 		for( let i = 0; i < this.state.cartProducts.length; i++) {
 			if( this.state.cartProducts[i].id === product.id ) {
 				let newArr = this.state.cartProducts;
@@ -141,7 +141,7 @@ class App extends Component {
 					<Route path="/account" component={(props) => 
 						<Account 
 							products={this.state.cartProducts} 
-							remove={this.removeProductHandler.bind(this)}
+							removeProductHandler={this.removeProductHandler.bind(this)}
 							changeCartQuantity={this.changeCartQuantity.bind(this)}
 						/>
 					}/>
