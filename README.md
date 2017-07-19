@@ -1,4 +1,4 @@
-A React App created for testing purposes
+## A React App created for testing purposes
 
 #### Functionality
 * The app is a basic store with products
