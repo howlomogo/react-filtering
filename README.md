@@ -1,4 +1,9 @@
 A React App created for testing purposes
 
-* The app is a basic store with products, the abilty to add products to our cart, change quanitys of items and remove items
-* Uses react-router-dom
+#### Functionality
+* The app is a basic store with products
+* The abilty to add products to the cart
+* Change quanitys of items and remove items
+* Routing
+* Dropdown, input and checkbox filtering
+* More
