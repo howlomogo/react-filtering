@@ -52,9 +52,14 @@ class App extends Component {
 			products: products,
 			term: '',
 			isInStock: true,
-			categoriesFilter: 'meat',
+			categoriesFilter: 'all',
 			cartProducts: []
 		}
+	}
+
+	changeCartQuantity(id) {
+		console.log(id);
+		// Get ID, change state based on product id
 	}
 
 	searchFilterHandler(event) {
@@ -119,7 +124,13 @@ class App extends Component {
 							categoryFilter={this.categoryFilterHandler.bind(this)}
 						/>
 					}/>
-					<Route path="/account" component={(props) => <Account products={this.state.cartProducts} remove={this.removeProductHandler.bind(this)}/>}/>
+					<Route path="/account" component={(props) => 
+						<Account 
+							products={this.state.cartProducts} 
+							remove={this.removeProductHandler.bind(this)}
+							changeCartQuantity={this.changeCartQuantity.bind(this)}
+						/>
+					}/>
 				</div>
 
 			</div>

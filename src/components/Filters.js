@@ -4,6 +4,7 @@ class Filters extends Component {
 	render() {
 
 		const categoriesList =[
+			'all',
 			'groceries', 
 			'drinks', 
 			'meat', 

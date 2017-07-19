@@ -12,7 +12,9 @@ class Account extends Component {
 						<div key={product.id}>
 							<h4> {product.name} </h4>
 							<h6> Quantity: {product.quantity} </h6>
-							<button onClick={() =>this.props.remove(product)}>Remove From Cart</button>
+							<label>Change Quantity</label>
+							<input className="ml-2" type="text"/>
+							<button type="button" className="ml-2" onClick={() => {this.props.changeCartQuantity(product.id)}}>Remove From Cart</button>
 						</div>
 					)
 				}

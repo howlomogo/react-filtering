@@ -7,9 +7,10 @@ class Home extends Component {
 
 		function filteredResults(term, isInStock, catFilter) {
 			return function(product){
+				console.log(catFilter);
 
 				if(product.name.toLowerCase().includes(term.toLowerCase()) || !term) {
-					if((isInStock && !product.stocked) || (catFilter !== product.cat)) {
+					if((isInStock && !product.stocked) || (catFilter !== product.cat && catFilter !== 'all')) {
 						return false;
 					}
 					else {
