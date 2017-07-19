@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import Account from './pages/Account';
 import './App.css';
 
-
+// Dummy JSON data - Todo Add in correct data
 const products = [
 	{
 		id: 1,

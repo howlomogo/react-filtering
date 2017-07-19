@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 
 
-
-let cheese = "hello";
-
 class CartItem extends Component {
 
 	constructor(props) {
