@@ -60,6 +60,7 @@ class App extends Component {
 	changeCartQuantity(id) {
 		console.log(id);
 		// Get ID, change state based on product id
+				
 	}
 
 	searchFilterHandler(event) {
