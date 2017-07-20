@@ -16,35 +16,35 @@ const products = [
 		name: "Carrot",
 		stocked: true,
 		cat: "groceries",
-		price: "0.79"
+		price: 0.79
 	},
 	{
 		id: 2,
 		name: "Coke",
 		stocked: true,
 		cat: "drinks",
-		price: "1.29"
+		price: 1.29
 	},
 	{
 		id: 3,
 		name: "Lamb",
 		stocked: false,
 		cat: "meat",
-		price: "4.59"
+		price: 4.59
 	},
 	{
 		id: 4,
 		name: "Shredded Wheat",
 		stocked: false,
 		cat: "cereal",
-		price: "2.49"
+		price: 2.49
 	},
 	{
 		id: 5,
 		name: "Beef",
 		stocked: true,
 		cat: "meat",
-		price: "3.89"
+		price: 3.89
 	}
 ]
 
@@ -58,8 +58,23 @@ class App extends Component {
 			term: '',
 			isInStock: true,
 			categoriesFilter: 'all',
-			cartProducts: []
+			cartProducts: [],
+			totalCost: 0
 		}
+	}
+
+	totalCostHandler() {
+		var totalCost = 0;
+
+		for(var i = 0; i < this.state.cartProducts.length; i++) {
+			totalCost += this.state.cartProducts[i].price * this.state.cartProducts[i].quantity;
+			console.log(totalCost);
+		}
+
+    	this.setState({
+    		totalCost: totalCost.toFixed(2)
+    	});
+
 	}
 
 	changeCartQuantity(product, newQuantity) {
@@ -77,6 +92,7 @@ class App extends Component {
 		    }
 		}
 		console.log(product);
+		this.totalCostHandler();
 	}
 
 	searchFilterHandler(event) {
@@ -113,6 +129,8 @@ class App extends Component {
 			newArr.push(product);
 			this.setState({ cartProducts: newArr});
 		}
+		
+		this.totalCostHandler();
 	}
 
 	removeProductHandler(product) {
@@ -126,6 +144,7 @@ class App extends Component {
 			}
 		}
 
+		this.totalCostHandler();
 	}
 
 	render() {
@@ -145,6 +164,7 @@ class App extends Component {
 					}/>
 					<Route path="/account" component={(props) => 
 						<Account 
+							state={this.state} 
 							products={this.state.cartProducts} 
 							removeProductHandler={this.removeProductHandler.bind(this)}
 							changeCartQuantity={this.changeCartQuantity.bind(this)}

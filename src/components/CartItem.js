@@ -22,6 +22,7 @@ class CartItem extends Component {
 			<div>
 				<h4> {this.props.product.name} </h4>
 				<h6> Quantity: {this.props.product.quantity} </h6>
+				<h4>Price: {this.props.product.price}</h4>
 				<label>Change Quantity</label>
 				<input type="text" value={this.state.productQuantity} onChange={e => this.setQuantity(e.target.value)}/>
 

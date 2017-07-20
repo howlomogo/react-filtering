@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CartItem from './../components/CartItem';
 
 class Account extends Component {
+
 	render() {
 		return (
 			<div>
@@ -19,6 +20,8 @@ class Account extends Component {
 						></CartItem>
 					)
 				}
+
+			<h4>Total Cost: &pound;{this.props.state.totalCost}</h4>
 
 			</div>
 		)
