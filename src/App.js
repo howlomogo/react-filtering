@@ -77,24 +77,6 @@ class App extends Component {
 
 	}
 
-	changeCartQuantity(product, newQuantity) {
-		let newArr = this.state.cartProducts;
-
-		// Get ID, change state based on product id
-		for(var i = 0; i < this.state.cartProducts.length; i++) {
-		    if (this.state.cartProducts[i].id === product.id) {
-
-		    	newArr[i].quantity = newQuantity;
-		    	this.setState({
-		    		cartProducts: newArr
-		    	});
-		        break;
-		    }
-		}
-		console.log(product);
-		this.totalCostHandler();
-	}
-
 	searchFilterHandler(event) {
 		this.setState({ term: event.target.value })
 	}
@@ -108,19 +90,31 @@ class App extends Component {
 		this.setState({ categoriesFilter: event.target.value });
 	}
 
-	addProductHandler(product) {
+	cartHandler(product, newQuantity) {
 		let newArr = this.state.cartProducts;
 
 		let alreadyInCart = false;
 		for(var i = 0; i < this.state.cartProducts.length; i++) {
 		    if (this.state.cartProducts[i].id === product.id) {
 
-		    	newArr[i].quantity++;
-		    	this.setState({
-		    		cartProducts: newArr
-		    	});
-		        alreadyInCart = true;
-		        break;
+		    	// If a quantity is specified in the function call it is coming from the account page
+		    	if(newQuantity) {
+			    	newArr[i].quantity = newQuantity;
+			    	this.setState({
+			    		cartProducts: newArr
+			    	});
+			        alreadyInCart = true;
+			        break;
+		    	}
+		    	// Else the product has been added through the hompage
+		    	else {
+			    	newArr[i].quantity++;
+			    	this.setState({
+			    		cartProducts: newArr
+			    	});
+			        alreadyInCart = true;
+			        break;
+		    	}
 		    }
 		}
 
@@ -151,12 +145,12 @@ class App extends Component {
 		return (
 			<Router>
 			<div>
-				<Header products={this.state.cartProducts}></Header>
+				<Header cartProducts={this.state.cartProducts}></Header>
 				<div>
 					<Route exact path="/" component={(props) => 
 						<Home 
 							state={this.state} 
-							addProduct={this.addProductHandler.bind(this)}
+							cartHandler={this.cartHandler.bind(this)}
 							searchFilter={this.searchFilterHandler.bind(this)} 
 							stockFilter={this.stockFilterHandler.bind(this)} 
 							categoryFilter={this.categoryFilterHandler.bind(this)}
@@ -167,7 +161,7 @@ class App extends Component {
 							state={this.state} 
 							products={this.state.cartProducts} 
 							removeProductHandler={this.removeProductHandler.bind(this)}
-							changeCartQuantity={this.changeCartQuantity.bind(this)}
+							cartHandler={this.cartHandler.bind(this)}
 						/>
 					}/>
 				</div>

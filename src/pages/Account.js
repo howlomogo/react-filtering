@@ -16,7 +16,7 @@ class Account extends Component {
 							key={product.id}
 							product={product} 
 							removeProduct={this.props.removeProductHandler} 
-							changeCartQuantity={this.props.changeCartQuantity}
+							cartHandler={this.props.cartHandler}
 						></CartItem>
 					)
 				}

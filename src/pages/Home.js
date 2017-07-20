@@ -47,7 +47,7 @@ class Home extends Component {
 							<Product
 								key={product.id}
 								product={product} 
-								addProduct={this.props.addProduct} 
+								cartHandler={this.props.cartHandler} 
 							></Product>
 					)
 				}

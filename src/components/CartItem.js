@@ -26,7 +26,7 @@ class CartItem extends Component {
 				<label>Change Quantity</label>
 				<input type="text" value={this.state.productQuantity} onChange={e => this.setQuantity(e.target.value)}/>
 
-				<button type="button" className="ml-2" onClick={() => {this.props.changeCartQuantity(this.props.product, this.state.productQuantity)}}>Change Quantity</button>
+				<button type="button" className="ml-2" onClick={() => {this.props.cartHandler(this.props.product, this.state.productQuantity)}}>Change Quantity</button>
 				<button type="button" className="ml-2" onClick={() => {this.props.removeProduct(this.props.product)}}>Remove From Cart</button>
 			</div>
 		)
