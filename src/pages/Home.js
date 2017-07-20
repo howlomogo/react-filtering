@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Filters from './../components/Filters';
+import Product from './../components/Product';
 
 
 class Home extends Component {
@@ -42,12 +43,12 @@ class Home extends Component {
 					this.props.state.products.filter(
 						filteredResults(this.props.state.term, this.props.state.isInStock, this.props.state.categoriesFilter))
 						.map( product =>
-						<div className="product--container" key={product.id}>
-							<h4> {product.name}</h4>
-							<h4> {product.cat}</h4>
-							<h4> In Stock: {product.stocked.toString()}</h4>
-							<button onClick={() =>this.props.addProduct(product)}>ADD TO CART</button>
-						</div>
+
+							<Product
+								key={product.id}
+								product={product} 
+								addProduct={this.props.addProduct} 
+							></Product>
 					)
 				}
 			</div>
