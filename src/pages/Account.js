@@ -6,9 +6,11 @@ class Account extends Component {
 	render() {
 		return (
 			<div>
-			<h1>ACCOUNT PAGE</h1>
+			<h3>Account</h3>
+			<hr />
 				{
 					/* NO RESULTS FOUND */
+					this.props.products.length ? 
 					this.props.products
 					.map( product =>
 
@@ -19,10 +21,14 @@ class Account extends Component {
 							cartHandler={this.props.cartHandler}
 						></CartItem>
 					)
+					:
+
+					<div className="noresults text-center">
+						<h2>No Results Found</h2>
+					</div>
 				}
-
-			<h4>Total Cost: &pound;{this.props.state.totalCost}</h4>
-
+				<hr />
+				<h4>Total Cost: &pound;{this.props.state.totalCost}</h4>
 			</div>
 		)
 	}

@@ -29,6 +29,7 @@ class Home extends Component {
 			<div>
 
 				<h3>Home</h3>
+				<hr />
 
 				<Filters 
 					state={this.props.state}

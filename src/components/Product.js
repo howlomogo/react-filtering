@@ -24,7 +24,7 @@ class Product extends Component {
 				<h4> &pound;{this.props.product.price}</h4>
 				<h4> {this.props.product.cat}</h4>
 				<h4> In Stock: {this.props.product.stocked.toString()}</h4>
-				<button onClick={() =>this.props.cartHandler(this.props.product)}>ADD TO CART</button>
+				<button className="btn btn-primary" onClick={() =>this.props.cartHandler(this.props.product)}>ADD TO CART</button>
 			</div>
 		)
 	}
