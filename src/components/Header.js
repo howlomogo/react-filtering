@@ -17,10 +17,11 @@ class Header extends Component {
 	render() {
 		return (
 			<div>
-				<div><Link to="/">Home</Link></div>
-				<div><Link to="/account">Account</Link></div>
-				<div>Items In Cart: {this.getCartAmount()}</div>
-				{ /* Update with quantity also */}
+				<div className="navigation">
+					<div><Link to="/">Home</Link></div>
+					<div><Link to="/account">Account</Link></div>
+					<div>Items In Cart: {this.getCartAmount()}</div>
+				</div>
 				<hr/>
 			</div>
 		)

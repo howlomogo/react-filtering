@@ -28,6 +28,7 @@ class Home extends Component {
 		return (
 			<div>
 
+				<h3>Home</h3>
 
 				<Filters 
 					state={this.props.state}
@@ -37,8 +38,6 @@ class Home extends Component {
 					>
 				</Filters>
 
-
-				<h1>HOME PAGE</h1>
 				{
 					this.props.state.products.filter(
 						filteredResults(this.props.state.term, this.props.state.isInStock, this.props.state.categoriesFilter))

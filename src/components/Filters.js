@@ -19,18 +19,25 @@ class Filters extends Component {
 		let newTerm = '';
 
 		return (
-			<form>
-				<label>Search for a product</label>
-				<input type="text" onChange={this.props.searchFilter} autoFocus value={this.props.state.term} />
-				<p>
-					Is Product In Stock
-					<input className="ml-2" type="checkbox" checked={this.props.state.isInStock} onChange={this.props.stockFilter} />
-				</p>
+			<form className="form-inline">
+				<hr />
+				<div className="form-group">
+					<label>Search for a product</label>
+					<input className="form-control" type="text" onChange={this.props.searchFilter} autoFocus value={this.props.state.term} />
+				</div>
 
-				<label>Which category is it in?</label>
-				<select value={this.props.state.categoriesFilter} onChange={this.props.categoryFilter}>
-					{categoriesList}
-				</select>
+				<div className="form-group">
+					<label>Is Product In Stock</label>
+					<input className="checkbox-inline" type="checkbox" checked={this.props.state.isInStock} onChange={this.props.stockFilter} />
+				</div>
+
+				<div className="form-group">
+					<label>Which category is it in?</label>
+					<select className="form-control" value={this.props.state.categoriesFilter} onChange={this.props.categoryFilter}>
+						{categoriesList}
+					</select>
+				</div>
+				<hr />
 			</form>
 		)
 	}

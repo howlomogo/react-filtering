@@ -144,7 +144,8 @@ class App extends Component {
 	render() {
 		return (
 			<Router>
-			<div>
+			<div className="container">
+
 				<Header cartProducts={this.state.cartProducts}></Header>
 				<div>
 					<Route exact path="/" component={(props) => 
