@@ -26,7 +26,7 @@ class Home extends Component {
 
 
 		return (
-			<div>
+			<div className="text-center">
 
 				<h3>Home</h3>
 				<hr />

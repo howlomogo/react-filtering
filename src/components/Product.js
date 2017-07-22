@@ -20,11 +20,14 @@ class Product extends Component {
 	render() {
 		return (
 			<div className="product--container" key={this.props.product.id}>
-				<h4> {this.props.product.name}</h4>
-				<h4> &pound;{this.props.product.price}</h4>
-				<h4> {this.props.product.cat}</h4>
-				<h4> In Stock: {this.props.product.stocked.toString()}</h4>
+				<h5> {this.props.product.name}</h5>
+				<h6 className="mb-3"> ({this.props.product.cat})</h6>				
+
+				<h5 className="mb-3"> &pound;{this.props.product.price}</h5>
+				<h6> In Stock: {this.props.product.stocked.toString()}</h6>
+
 				<button className="btn btn-primary" onClick={() =>this.props.cartHandler(this.props.product)}>ADD TO CART</button>
+
 			</div>
 		)
 	}

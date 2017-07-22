@@ -8,13 +8,14 @@
 
 .product--container {
   display: inline-block;;
-  width: 300px;
-  height: 300px;
+  width: 260px;
+  height: 220px;
   text-align: center;
   margin-right: 16px;
   margin-bottom: 16px;
   background-color: #f5f5f5;
   border: 1px solid #bbb;
+  padding:16px;
 }
 
 .cart--container {
